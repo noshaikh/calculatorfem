@@ -39,6 +39,7 @@ function handleSymbol(value) {
       buffer = "0";
       runningTotal = 0;
       previousOperator = null;
+      rerender();
       break;
     case "=":
       if (previousOperator === null) {
@@ -55,6 +56,7 @@ function handleSymbol(value) {
       } else {
         buffer = buffer.substring(0, buffer.length - 1); //substring returns between start and end values.
       }
+      rerender();
       break;
     default:
       //default case for handling math
