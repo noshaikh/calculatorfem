@@ -1,0 +1,70 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0 auto;
+}
+.calc {
+  margin: 0 auto;
+  width: 500px;
+  background-color: black;
+  color: white;
+}
+
+.screen {
+  color: white;
+  font-family: "Courier New", Courier, monospace;
+  text-align: right;
+  font-size: 40px;
+  height: 55px;
+}
+
+/* .button-container {
+  display: flex;
+} */
+.row {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+.button {
+  padding-top: 2.5%;
+  width: 24.7%;
+  text-align: center;
+  background-color: #d8d9db;
+  color: black;
+  font-size: 40px;
+  font-family: monospace;
+  height: 80px;
+  border-bottom: 1px solid black;
+  border-radius: 0; /*removes default button formating */
+  cursor: pointer; /* helpful to tell ppl to click on it */
+}
+
+.double {
+  width: 49.8%;
+}
+
+.three-fourth {
+  width: 74.9%;
+}
+
+.button:last-child {
+  background-color: #df974c;
+  color: white;
+}
+.button:last-child:hover {
+  background-color: #dfb07e;
+}
+
+.button:last-child:active {
+  background-color: #dd8d37;
+}
+
+.button:hover {
+  background-color: #ebebeb;
+}
+.button:active {
+  background-color: #bbbcbe;
+}
