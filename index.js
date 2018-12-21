@@ -20,6 +20,7 @@ function buttonClick(value) {
   } else {
     handleNumber(value);
   }
+  rerender();
 }
 
 function handleNumber(value) {
@@ -28,7 +29,6 @@ function handleNumber(value) {
   } else {
     buffer += value;
   }
-  rerender();
 }
 
 function handleSymbol(value) {
@@ -39,13 +39,13 @@ function handleSymbol(value) {
       buffer = "0";
       runningTotal = 0;
       previousOperator = null;
-      rerender();
+
       break;
     case "=":
       if (previousOperator === null) {
         return;
       }
-      flushOperation(parseInt(buffer)); //turns buffer into a number and sends to flushOperation
+      flushOperation(parseInt(buffer)); //turns buffer into a number for flushOperation
       previousOperator = null;
       buffer = "" + runningTotal; //keeping buffer the same type because its not good to switch types...and buffer has always been a string.
       runningTotal = 0;
@@ -56,12 +56,35 @@ function handleSymbol(value) {
       } else {
         buffer = buffer.substring(0, buffer.length - 1); //substring returns between start and end values.
       }
-      rerender();
+
       break;
     default:
       //default case for handling math
       handleMath(value);
       break;
+  }
+}
+
+function handleMath(value) {
+  const intBuffer = parseInt(buffer);
+  if (runningTotal === 0) {
+    runningTotal = intBuffer; // we save intBuffer in running total so when we press an operator key we can call this value
+  } else {
+    flushOperation(intBuffer);
+  }
+  previousOperator = value;
+  buffer = "0";
+}
+
+function flushOperation(intBuffer) {
+  if (previousOperator === "+") {
+    runningTotal += intBuffer;
+  } else if (previousOperator === "-") {
+    runningTotal -= intBuffer;
+  } else if (previousOperator === "x") {
+    runningTotal *= intBuffer;
+  } else {
+    runningTotal /= intBuffer;
   }
 }
 
